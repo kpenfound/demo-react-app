@@ -3,7 +3,7 @@
 
   connect(async (client) => {
     // const image = "index.docker.io/kylepenfound/demo-app:latest"
-    const src = client.host().directory(".", {exclude:["node_modules/", "out/", "ci/"]})
+    const src = client.host().directory(".", {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
 
     const cache = client.cacheVolume("yarn_cache")
     const npm = client.cacheVolume("node_modules")
