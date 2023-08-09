@@ -8,10 +8,7 @@ pipeline {
     stage("dagger") {
       steps {
         sh '''
-            npm config set prefix '/home/jenkins/.npm-global'
-            . /home/jenkins/.profile
-            export PATH=$PATH:/home/jenkins/.npm-global/bin
-            ls -la /home/jenkins/.npm-global
+            npm i @dagger.io/dagger@0.6.4
             dagger run npm run ci
         '''
       }
