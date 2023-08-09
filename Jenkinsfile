@@ -8,6 +8,7 @@ pipeline {
     stage("dagger") {
       steps {
         sh '''
+            source ~/.profile
             dagger run npm run ci
         '''
       }
