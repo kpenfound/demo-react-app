@@ -10,6 +10,7 @@ pipeline {
         sh '''
             npm config set prefix '/home/jenkins/.npm-global'
             . /home/jenkins/.profile
+            export PATH=$PATH:/home/jenkins/.npm-global/bin
             dagger run npm run ci
         '''
       }
