@@ -9,6 +9,7 @@ pipeline {
       steps {
         sh '''
             npm config set prefix '/home/jenkins/.npm-global'
+            . /home/jenkins/.profile
             dagger run npm run ci
         '''
       }
