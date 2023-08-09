@@ -8,7 +8,7 @@ pipeline {
     stage("dagger") {
       steps {
         sh '''
-            npm install @dagger.io/dagger@latest
+            npm install @dagger.io/dagger@0.6.4
             dagger run npm run ci
         '''
       }
