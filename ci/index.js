@@ -1,8 +1,8 @@
 ;(async function() {
   let connect = (await import("@dagger.io/dagger")).connect
   connect(async (client) => {
-    await frontendPipeline(client)
-    await backendPipeline(client)
+    await frontendPipeline(client.pipeline('Frontend'))
+    await backendPipeline(client.pipeline('Backend'))
   }, {LogOutput: process.stdout})
 })()
 
