@@ -1,8 +1,22 @@
 ;(async function() {
   let connect = (await import("@dagger.io/dagger")).connect
   connect(async (client) => {
-    await frontendPipeline(client.pipeline('Frontend'))
-    await backendPipeline(client.pipeline('Backend'))
+    let frontendImage = await frontendPipeline(client.pipeline('Frontend'))
+    let backendImage = await backendPipeline(client.pipeline('Backend'))
+
+    const registry = process.env.REGISTRY
+    const registry_user = process.env.REGISTRY_USER
+    const registry_token = process.env.REGISTRY_TOKEN
+
+    // Production image output
+    if(registry_token == "") {
+      await frontendImage.export("./out/prod-frontend-image.tar")
+      await backendImage.export("./out/prod-backend-image.tar")
+    } else {
+      const token_secret = client.setSecret('registry_token', registry_token)
+      await frontendImage.withRegistryAuth(registry, registry_user, token_secret).publish(`${registry}/docker/frontend:latest`)
+      await backendImage.withRegistryAuth(registry, registry_user, token_secret).publish(`${registry}/docker/backend:latest`)
+    }
   }, {LogOutput: process.stdout})
 })()
 
@@ -16,6 +30,14 @@ async function backendPipeline(client) {
   .withExec(["node", "--test", "backend/"])
 
   await test.sync()
+
+  // Production Image Build
+  const prod = client.pipeline('Production').container()
+  .from("node:16")
+  .with(withProject(client, backend))
+  .withExec(["yarn", "install", "--frozen-lockfile"])
+
+  return prod
 }
 
 function backendService(client, source) {
@@ -59,9 +81,7 @@ async function frontendPipeline(client) {
    .from("cgr.dev/chainguard/nginx:latest")
    .withDirectory("/var/lib/nginx/html", build.directory("/src/build"))
 
-   // Production image output
-   await prod.export("./out/prod-image.tar")
-   // await prod.publish(image)
+   return prod
 }
 
 function nodeBase(client, source) {
