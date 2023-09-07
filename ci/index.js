@@ -12,7 +12,7 @@
     const registry_token = process.env.REGISTRY_TOKEN
 
     // Production image output
-    if(registry_token == "") {
+    if(registry_token == undefined) {
       await frontendImage.export("./out/prod-frontend-image.tar")
       await backendImage.export("./out/prod-backend-image.tar")
     } else {
