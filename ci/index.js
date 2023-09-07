@@ -1,9 +1,12 @@
 ;(async function() {
   let connect = (await import("@dagger.io/dagger")).connect
   connect(async (client) => {
+    // Frontend CI
     let frontendImage = await frontendPipeline(client.pipeline('Frontend'))
+    // Backend CI
     let backendImage = await backendPipeline(client.pipeline('Backend'))
 
+    // Registry config
     const registry = process.env.REGISTRY
     const registry_user = process.env.REGISTRY_USER
     const registry_token = process.env.REGISTRY_TOKEN
@@ -20,6 +23,7 @@
   }, {LogOutput: process.stdout})
 })()
 
+// Pipeline for Backend's CI
 async function backendPipeline(client) {
   const backend = client.host().directory(".", {include:["backend/", "package-lock.json", "package.json", "yarn.lock"]})
 
@@ -40,6 +44,7 @@ async function backendPipeline(client) {
   return prod
 }
 
+// Sidecar that runs Backend
 function backendService(client, source) {
   let backend = nodeBase(client, source)
   .with(redis(client))
@@ -53,6 +58,7 @@ function backendService(client, source) {
   }
 }
 
+// Sidecar that runs Redis
 function redis(client) {
   let service = client.container().from("redis")
   .withExec(['redis-server'])
@@ -64,6 +70,7 @@ function redis(client) {
   }
 }
 
+// Pipeline for Frontend's CI
 async function frontendPipeline(client) {
   const frontend = client.host().directory(".", {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
 
@@ -84,6 +91,7 @@ async function frontendPipeline(client) {
    return prod
 }
 
+// Environment for Node projects
 function nodeBase(client, source) {
   return client.container()
   .from("node:16")
@@ -92,12 +100,14 @@ function nodeBase(client, source) {
   .with(withNodeModules(client))
 }
 
+// Helper to mount a source code directory
 function withProject(client, source) {
   return (container) => {
     return container.withDirectory('/src', source).withWorkdir('/src').withEnvVariable("CI", "true")
   }
 }
 
+// Helper to configure Yarn cache
 function withYarn(client) {
   const cache = client.cacheVolume("yarn_cache")
 
@@ -106,6 +116,7 @@ function withYarn(client) {
   }
 }
 
+// Helper to configure node_modules cache
 function withNodeModules(client) {
   const cache = client.cacheVolume("node_modules")
 
@@ -114,6 +125,7 @@ function withNodeModules(client) {
   }
 }
 
+// Example pipeline to build Jenkins from a git ref
 function buildJenkins(client) {
   repo = "https://github.com/jenkinsci/jenkins"
 
