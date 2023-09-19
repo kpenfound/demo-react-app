@@ -17,5 +17,5 @@ jobs:
         run: cd /usr/local && { curl -L https://dl.dagger.io/dagger/install.sh | sh; cd -; }
       - name: Run Dagger pipeline
         run: dagger run node ci/index.js
-        # env:
-        #    DAGGER_CLOUD_TOKEN: ${{ secrets.DAGGER_TOKEN }}
+        env:
+           DAGGER_CLOUD_TOKEN: ${{ secrets.DAGGER_TOKEN }}
