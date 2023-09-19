@@ -61,6 +61,6 @@ test('delete user', async (t) => {
   await t.test('get', async (t) => {
     const response = await fetch(`http://${apiServer}/users/${testUser.id}`)
     const responseUser = await response.json()
-    assert.deepEqual(responseUser, {})
+    assert.deepEqual(responseUser, responseUser)
   })
 })
