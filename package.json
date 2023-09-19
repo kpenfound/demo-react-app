@@ -41,6 +41,6 @@
     ]
   },
   "devDependencies": {
-    "@dagger.io/dagger": "^0.8.4"
+    "@dagger.io/dagger": "^0.8.7"
   }
 }
