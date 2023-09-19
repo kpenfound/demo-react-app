@@ -34,7 +34,7 @@ test('update user', async (t) => {
   await t.test('patch', async (t) => {
     testUser.username = 'tester2'
     testUser.password = 'pa55word'
-    const response = await fetch(`http://${apiServer}/users/${testUser.id}`, {
+    const response = await fetch(`http://${apiServer}/user/${testUser.id}`, {
       method: 'patch',
       body: JSON.stringify(testUser),
       headers: {'Content-Type': 'application/json'},
@@ -61,6 +61,6 @@ test('delete user', async (t) => {
   await t.test('get', async (t) => {
     const response = await fetch(`http://${apiServer}/users/${testUser.id}`)
     const responseUser = await response.json()
-    assert.deepEqual(responseUser, responseUser)
+    assert.deepEqual(responseUser, {})
   })
 })
