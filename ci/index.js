@@ -124,27 +124,3 @@ function withNodeModules(client) {
     return container.withMountedCache("/src/node_modules", cache)
   }
 }
-
-// Example pipeline to build Jenkins from a git ref
-function buildJenkins(client) {
-  repo = "https://github.com/jenkinsci/jenkins"
-
-  source = client.git(repo).branch("master").tree()
-  maven = client.cacheVolume("maven")
-
-  builder = client.container().pipeline("Build Jenkins")
-  .from("eclipse-temurin:17-focal")
-  .withExec(["apt-get", "update"])
-  .withExec(["apt-get", "install", "-y", "git"])
-  .withWorkdir("/tmp")
-  .withExec(["wget", "https://dlcdn.apache.org/maven/maven-3/3.9.4/binaries/apache-maven-3.9.4-bin.tar.gz"])
-  .withExec(["tar", "xvf", "apache-maven-3.9.4-bin.tar.gz"])
-  .withExec(["mv", "apache-maven-3.9.4", "/opt/"])
-  .withEnvVariable("M2_HOME", "/opt/apache-maven-3.9.4")
-  .withDirectory("/src", source)
-  .withWorkdir("/src")
-  .withMountedCache("/root/.m2", maven)
-  .withExec(["sh", "-c", "/opt/apache-maven-3.9.4/bin/mvn -am -pl war,bom -Pquick-build clean install"])
-
-  return builder
-}
