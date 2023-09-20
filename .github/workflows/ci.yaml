@@ -1,6 +1,5 @@
 name: dagger
 on:
-  push: [main]
   pull_request:
 
 jobs:
