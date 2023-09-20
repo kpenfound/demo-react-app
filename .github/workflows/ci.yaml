@@ -22,5 +22,5 @@ jobs:
       - name: Stop Engine
         run: |
           ENGINE=$(docker ps -aq)
-          docker stop $ENGINE
+          docker stop -t 6000 $ENGINE
           docker logs $ENGINE
