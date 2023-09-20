@@ -2,30 +2,15 @@
   let connect = (await import("@dagger.io/dagger")).connect
   connect(async (client) => {
     // Backend CI
-    let backendImage = await backendPipeline(client.pipeline('Backend'))
+    await backendPipeline(client.pipeline('Backend'))
     // Frontend CI
-    let frontendImage = await frontendPipeline(client.pipeline('Frontend'))
-
-    // Registry config
-    const registry = process.env.REGISTRY
-    const registry_user = process.env.REGISTRY_USER
-    const registry_token = process.env.REGISTRY_TOKEN
-
-    // Production image output
-    if(registry_token == undefined) {
-     await frontendImage.export("./out/prod-frontend-image.tar")
-     await backendImage.export("./out/prod-backend-image.tar")
-    } else {
-      const token_secret = client.setSecret('registry_token', registry_token)
-      await frontendImage.withRegistryAuth(registry, registry_user, token_secret).publish(`${registry}/docker/frontend:latest`)
-     await backendImage.withRegistryAuth(registry, registry_user, token_secret).publish(`${registry}/docker/backend:latest`)
-    }
-  }, {LogOutput: process.stdout})
+    await frontendPipeline(client.pipeline('Frontend'))
+  })
 })()
 
 // Pipeline for Backend's CI
 async function backendPipeline(client) {
-  const backend = getBackend(client)
+  const backend = client.host().directory(".", {include:["backend/", "package-lock.json", "package.json", "yarn.lock"]})
 
   // Test pipeline
   const test = nodeBase(client.pipeline("Test"), backend)
@@ -72,7 +57,7 @@ function redis(client) {
 
 // Pipeline for Frontend's CI
 async function frontendPipeline(client) {
-  const frontend = getFrontend(client)
+  const frontend = client.host().directory(".", {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
 
    // Test pipeline
    const test = nodeBase(client.pipeline("Test"), frontend)
@@ -97,7 +82,6 @@ function nodeBase(client, source) {
   .from("node:16")
   .with(withProject(client, source))
   .with(withYarn(client))
-//  .with(withNodeModules(client))
 }
 
 // Helper to mount a source code directory
@@ -114,41 +98,4 @@ function withYarn(client) {
   return (container) => {
     return container.withMountedCache("/cache/yarn", cache).withEnvVariable("YARN_CACHE_FOLDER", "/cache/yarn")
   }
-}
-
-// Helper to configure node_modules cache
-function withNodeModules(client) {
-  const cache = client.cacheVolume("node_modules")
-
-  return (container) => {
-    return container.withMountedCache("/src/node_modules", cache)
-  }
-}
-
-// Helper to get frontend code
-function getFrontend(client) {
-  if (isCi()) {
-    console.log(ciRef())
-    gitdir = client.git("github.com/kpenfound/demo-react-app").commit(ciRef()).tree()
-    return gitdir//return client.directory().withDirectory(".", gitdir, {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
-  }
-  return client.host().directory(".", {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
-}
-
-// Helper to get backend code
-function getBackend(client) {
-  if (isCi()) {
-    gitdir = client.git("github.com/kpenfound/demo-react-app").commit(ciRef()).tree()
-    return gitdir//return client.directory().withDirectory(".", gitdir, {include:["backend/", "package-lock.json", "package.json", "yarn.lock"]})
-  }
-  return client.host().directory(".", {include:["backend/", "package-lock.json", "package.json", "yarn.lock"]})
-}
-
-// Determine if we are in CI
-function isCi() {
-  return process.env.CI == "trueNEVER"
-}
-
-function ciRef() {
-  return process.env.GITHUB_REF_NAME
 }
