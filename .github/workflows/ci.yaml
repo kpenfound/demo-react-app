@@ -19,7 +19,8 @@ jobs:
         run: dagger run node ci/index.js
         env:
            DAGGER_CLOUD_TOKEN: ${{ secrets.DAGGER_CLOUD_TOKEN }}
-      - name: Engine Logs
-        run: docker logs $(docker ps -aq)
       - name: Stop Engine
-        run: docker stop $(docker ps -aq)
+        run: |
+          ENGINE=$(docker ps -aq)
+          docker stop $ENGINE
+          docker logs $ENGINE
