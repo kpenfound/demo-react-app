@@ -21,6 +21,6 @@ jobs:
            DAGGER_CLOUD_TOKEN: ${{ secrets.DAGGER_CLOUD_TOKEN }}
       - name: Stop Engine
         run: |
-          ENGINE=$(docker ps --filter name="dagger-engine-*" -aq)
+          ENGINE=$(docker ps --filter name="dagger-engine-*" -q)
           docker stop -t 300 $ENGINE
           docker logs $ENGINE
