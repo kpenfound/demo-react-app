@@ -25,7 +25,7 @@
 
 // Pipeline for Backend's CI
 async function backendPipeline(client) {
-  const backend = client.host().directory(".", {include:["backend/", "package-lock.json", "package.json", "yarn.lock"]})
+  const backend = getBackend(client)
 
   // Test pipeline
   const test = nodeBase(client.pipeline("Test"), backend)
@@ -72,7 +72,7 @@ function redis(client) {
 
 // Pipeline for Frontend's CI
 async function frontendPipeline(client) {
-  const frontend = client.host().directory(".", {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
+  const frontend = getFrontend(client)
 
    // Test pipeline
    const test = nodeBase(client.pipeline("Test"), frontend)
@@ -123,4 +123,31 @@ function withNodeModules(client) {
   return (container) => {
     return container.withMountedCache("/src/node_modules", cache)
   }
+}
+
+// Helper to get frontend code
+function getFrontend(client) {
+  if (isCi()) {
+    gitdir = client.git("github.com/kpenfound/demo-react-app").commit(ciRef()).tree()
+    return client.directory().withDirectory(".", gitdir, {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
+  }
+  return client.host().directory(".", {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
+}
+
+// Helper to get backend code
+function getBackend(client) {
+  if (isCi()) {
+    gitdir = client.git("github.com/kpenfound/demo-react-app").commit(ciRef()).tree()
+    return client.directory().withDirectory(".", gitdir, {include:["backend/", "package-lock.json", "package.json", "yarn.lock"]})
+  }
+  return client.host().directory(".", {include:["backend/", "package-lock.json", "package.json", "yarn.lock"]})
+}
+
+// Determine if we are in CI
+function isCi() {
+  return process.env.CI == "true"
+}
+
+function ciRef() {
+  return process.env.GITHUB_REF_NAME
 }
