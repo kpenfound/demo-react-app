@@ -97,7 +97,7 @@ function nodeBase(client, source) {
   .from("node:16")
   .with(withProject(client, source))
   .with(withYarn(client))
-  .with(withNodeModules(client))
+//  .with(withNodeModules(client))
 }
 
 // Helper to mount a source code directory
@@ -129,7 +129,7 @@ function withNodeModules(client) {
 function getFrontend(client) {
   if (isCi()) {
     gitdir = client.git("github.com/kpenfound/demo-react-app").commit(ciRef()).tree()
-    return client.directory().withDirectory(".", gitdir, {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
+    return gitdir//return client.directory().withDirectory(".", gitdir, {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
   }
   return client.host().directory(".", {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
 }
@@ -138,7 +138,7 @@ function getFrontend(client) {
 function getBackend(client) {
   if (isCi()) {
     gitdir = client.git("github.com/kpenfound/demo-react-app").commit(ciRef()).tree()
-    return client.directory().withDirectory(".", gitdir, {include:["backend/", "package-lock.json", "package.json", "yarn.lock"]})
+    return gitdir//return client.directory().withDirectory(".", gitdir, {include:["backend/", "package-lock.json", "package.json", "yarn.lock"]})
   }
   return client.host().directory(".", {include:["backend/", "package-lock.json", "package.json", "yarn.lock"]})
 }
