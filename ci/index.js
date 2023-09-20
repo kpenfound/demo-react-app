@@ -1,10 +1,10 @@
 ;(async function() {
   let connect = (await import("@dagger.io/dagger")).connect
   connect(async (client) => {
+    // Backend CI
+    let backendImage = await backendPipeline(client.pipeline('Backend'))
     // Frontend CI
     let frontendImage = await frontendPipeline(client.pipeline('Frontend'))
-    // Backend CI
-   let backendImage = await backendPipeline(client.pipeline('Backend'))
 
     // Registry config
     const registry = process.env.REGISTRY
