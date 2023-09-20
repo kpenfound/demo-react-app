@@ -146,7 +146,7 @@ function getBackend(client) {
 
 // Determine if we are in CI
 function isCi() {
-  return process.env.CI == "true"
+  return process.env.CI == "trueNEVER"
 }
 
 function ciRef() {
