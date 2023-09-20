@@ -34,7 +34,7 @@ test('update user', async (t) => {
   await t.test('patch', async (t) => {
     testUser.username = 'tester2'
     testUser.password = 'pa55word'
-    const response = await fetch(`http://${apiServer}/user/${testUser.id}`, {
+    const response = await fetch(`http://${apiServer}/users/${testUser.id}`, {
       method: 'patch',
       body: JSON.stringify(testUser),
       headers: {'Content-Type': 'application/json'},
