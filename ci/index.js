@@ -4,7 +4,7 @@
     // Frontend CI
     let frontendImage = await frontendPipeline(client.pipeline('Frontend'))
     // Backend CI
-    let backendImage = await backendPipeline(client.pipeline('Backend'))
+  //  let backendImage = await backendPipeline(client.pipeline('Backend'))
 
     // Registry config
     const registry = process.env.REGISTRY
@@ -13,12 +13,12 @@
 
     // Production image output
     if(registry_token == undefined) {
-      await frontendImage.export("./out/prod-frontend-image.tar")
-      await backendImage.export("./out/prod-backend-image.tar")
+   //   await frontendImage.export("./out/prod-frontend-image.tar")
+   //   await backendImage.export("./out/prod-backend-image.tar")
     } else {
       const token_secret = client.setSecret('registry_token', registry_token)
       await frontendImage.withRegistryAuth(registry, registry_user, token_secret).publish(`${registry}/docker/frontend:latest`)
-      await backendImage.withRegistryAuth(registry, registry_user, token_secret).publish(`${registry}/docker/backend:latest`)
+    //  await backendImage.withRegistryAuth(registry, registry_user, token_secret).publish(`${registry}/docker/backend:latest`)
     }
   }, {LogOutput: process.stdout})
 })()
@@ -128,6 +128,7 @@ function withNodeModules(client) {
 // Helper to get frontend code
 function getFrontend(client) {
   if (isCi()) {
+    console.log(ciRef())
     gitdir = client.git("github.com/kpenfound/demo-react-app").commit(ciRef()).tree()
     return gitdir//return client.directory().withDirectory(".", gitdir, {include:["src/", "public/", "package-lock.json", "package.json", "yarn.lock"]})
   }
