@@ -96,7 +96,7 @@ function nodeBase(client, source) {
   return client.container()
   .from("node:16")
   .with(withProject(client, source))
-  .with(withYarn(client))
+//  .with(withYarn(client))
 //  .with(withNodeModules(client))
 }
 
