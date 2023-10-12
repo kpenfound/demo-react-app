@@ -1,7 +1,7 @@
 name: dagger
 on:
-  push: [main]
-  pull_request:
+  push: 
+    branches: [main]
 
 jobs:
   ci:
