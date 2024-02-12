@@ -37,7 +37,7 @@ func (m *DemoReactApp) Test(ctx context.Context) error {
 }
 
 func startGroup(name string) {
-	os.Stdout.Write(fmt.Srintf("::group::%s\n", name))
+	os.Stdout.Write(fmt.Sprintf("::group::%s\n", name))
 }
 
 func endGroup() {
