@@ -36,9 +36,9 @@ func (m *DemoReactApp) Test(ctx context.Context) error {
 }
 
 func startGroup(name string) {
-	fmt.Printf("::group::%s\n", name)
+	fmt.Printf("\n::group::%s\n", name)
 }
 
 func endGroup() {
-	fmt.Println("::endgroup::")
+	fmt.Printf("\n::endgroup::\n")
 }
