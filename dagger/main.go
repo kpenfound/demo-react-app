@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 )
 
 type DemoReactApp struct {}
@@ -36,9 +37,9 @@ func (m *DemoReactApp) Test(ctx context.Context) error {
 }
 
 func startGroup(name string) {
-	fmt.Printf("\n::group::%s\n", name)
+	os.Stdout.Write(fmt.Srintf("::group::%s\n", name))
 }
 
 func endGroup() {
-	fmt.Printf("\n::endgroup::\n")
+	os.Stdout.Write("::endgroup::")
 }
