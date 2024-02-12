@@ -1,7 +1,6 @@
 name: dagger
 on:
-  push: 
-    branches: [main]
+  push:
 
 jobs:
   ci:
@@ -9,19 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Test
+        uses: dagger/dagger-for-github@v5
         with:
-          node-version: 16
-      - name: Install deps
-        run: npm ci
-      - name: Install Dagger CLI
-        run: cd /usr/local && { curl -L https://dl.dagger.io/dagger/install.sh | sh; cd -; }
-      - name: Run Dagger pipeline
-        run: dagger run node ci/index.js
-        env:
-           DAGGER_CLOUD_TOKEN: ${{ secrets.DAGGER_CLOUD_TOKEN }}
-      - name: Stop Engine
-        run: |
-          ENGINE=$(docker ps --filter name="dagger-engine-*" -q)
-          docker stop -t 300 $ENGINE
-          docker logs $ENGINE
+          args: test
