@@ -12,3 +12,4 @@ jobs:
         uses: dagger/dagger-for-github@v5
         with:
           args: test
+          version: "0.9.9"
