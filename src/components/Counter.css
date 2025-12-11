@@ -1,0 +1,46 @@
+.counter {
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.counter h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.counter__display {
+  font-size: 48px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 20px 0;
+}
+
+.counter__controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.counter__controls button {
+  padding: 10px 20px;
+  font-size: 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.counter__controls button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.counter__controls button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

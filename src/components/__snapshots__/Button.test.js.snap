@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component Snapshots should match snapshot for disabled button 1`] = `
+<button
+  class="button button--primary"
+  data-testid="button"
+  disabled=""
+>
+  Disabled
+</button>
+`;
+
+exports[`Button Component Snapshots should match snapshot for primary button 1`] = `
+<button
+  class="button button--primary"
+  data-testid="button"
+>
+  Primary
+</button>
+`;
+
+exports[`Button Component Snapshots should match snapshot for secondary variant 1`] = `
+<button
+  class="button button--secondary"
+  data-testid="button"
+>
+  Secondary
+</button>
+`;
