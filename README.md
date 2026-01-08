@@ -2,6 +2,31 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Testing
+
+This project showcases comprehensive testing approaches for React applications:
+
+- **Unit Tests (Jest + React Testing Library)**: Component-level testing
+- **E2E Tests (Playwright)**: Full application testing with real browser automation
+
+### Running Tests
+
+```bash
+# Run unit tests (Jest)
+npm test
+
+# Run E2E tests (Playwright)
+npm run test:e2e
+
+# Run E2E tests with UI (recommended for development)
+npm run test:e2e:ui
+
+# Run all tests
+npm run test:all
+```
+
+For detailed Playwright testing documentation, see [PLAYWRIGHT.md](./PLAYWRIGHT.md).
+
 ## Available Scripts
 
 In the project directory, you can run:
