@@ -967,6 +967,13 @@
   dependencies:
     "@opentelemetry/sdk-node" "^0.208.0"
 
+"@otel-test-runner/instrumentation@0.3.1":
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/@otel-test-runner/instrumentation/-/instrumentation-0.3.1.tgz"
+  integrity sha512-f2bRAGY/QXu8vKBHXLgOQTqdsQ+f1eo+z9eInw4X+DB9/lA2iNTXS8BJFM+5/AJjkfXFEPLobbqZpSyfqi6+cw==
+  dependencies:
+    "@opentelemetry/sdk-node" "^0.208.0"
+
 "@otel-test-runner/jest-test@^0.1.0":
   version "0.1.0"
   resolved "https://registry.npmjs.org/@otel-test-runner/jest-test/-/jest-test-0.1.0.tgz"
@@ -974,6 +981,13 @@
   dependencies:
     "@otel-test-runner/instrumentation" "0.1.0"
     jest "^30.2.0"
+
+"@otel-test-runner/vitest-otel@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/@otel-test-runner/vitest-otel/-/vitest-otel-0.3.1.tgz"
+  integrity sha512-9425RZUa3Lvqa5h5/14zLGnkBsgxyqA43bgEnIBGpwOqJ01SzGQeDrlZ9A/Kp/a/WBoBFfcv0UQqD5kp9f359Q==
+  dependencies:
+    "@otel-test-runner/instrumentation" "0.3.1"
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
@@ -1322,7 +1336,7 @@
   dependencies:
     tinyrainbow "^3.0.3"
 
-"@vitest/runner@4.0.16":
+"@vitest/runner@^4.0.16", "@vitest/runner@4.0.16":
   version "4.0.16"
   resolved "https://registry.npmjs.org/@vitest/runner/-/runner-4.0.16.tgz"
   integrity sha512-VWEDm5Wv9xEo80ctjORcTQRJ539EGPB3Pb9ApvVRAY1U/WkHXmmYISqU5E79uCwcW7xYUV38gwZD+RV755fu3Q==

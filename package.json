@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@otel-test-runner/jest-test": "^0.1.0",
+    "@otel-test-runner/vitest-otel": "^0.3.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
