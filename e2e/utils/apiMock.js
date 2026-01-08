@@ -27,7 +27,10 @@ export async function mockUsersSuccess(page, users = null) {
 /**
  * Mock API error response
  */
-export async function mockUsersError(page, errorMessage = 'Failed to fetch users') {
+export async function mockUsersError(
+  page,
+  errorMessage = 'Failed to fetch users'
+) {
   await page.route('**/api/users*', async (route) => {
     await route.fulfill({
       status: 500,
@@ -53,7 +56,11 @@ export async function mockUsersEmpty(page) {
 /**
  * Mock slow API response (for testing loading states)
  */
-export async function mockUsersSlowResponse(page, delayMs = 2000, users = null) {
+export async function mockUsersSlowResponse(
+  page,
+  delayMs = 2000,
+  users = null
+) {
   const defaultUsers = users || [
     { id: 1, name: 'John Doe', email: 'john@example.com' },
     { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
@@ -129,7 +136,9 @@ export class APIInterceptor {
     const startTime = Date.now();
     while (this.calls.length < count) {
       if (Date.now() - startTime > timeout) {
-        throw new Error(`Timeout waiting for ${count} API calls. Got ${this.calls.length}`);
+        throw new Error(
+          `Timeout waiting for ${count} API calls. Got ${this.calls.length}`
+        );
       }
       await new Promise((resolve) => setTimeout(resolve, 100));
     }

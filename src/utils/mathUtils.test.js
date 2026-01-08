@@ -10,7 +10,7 @@ import {
   divide,
   calculatePercentage,
   isEven,
-  factorial
+  factorial,
 } from './mathUtils';
 
 describe('mathUtils', () => {
@@ -111,7 +111,9 @@ describe('mathUtils', () => {
     });
 
     it('should throw error for negative numbers', () => {
-      expect(() => factorial(-1)).toThrow('Factorial not defined for negative numbers');
+      expect(() => factorial(-1)).toThrow(
+        'Factorial not defined for negative numbers'
+      );
     });
   });
 });

@@ -21,7 +21,8 @@ export const useLocalStorage = (key, initialValue) => {
   const setValue = (value) => {
     try {
       // Allow value to be a function so we have same API as useState
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
     } catch (error) {
@@ -61,7 +62,7 @@ export const useDebounce = (value, delay) => {
 export const useToggle = (initialValue = false) => {
   const [value, setValue] = useState(initialValue);
 
-  const toggle = () => setValue(v => !v);
+  const toggle = () => setValue((v) => !v);
   const setTrue = () => setValue(true);
   const setFalse = () => setValue(false);
 

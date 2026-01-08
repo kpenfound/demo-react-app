@@ -4,11 +4,12 @@
  */
 
 import { render, screen, fireEvent } from '@testing-library/react';
-import { 
-  ThemeProvider, 
-  useTheme, 
-  ThemedBox, 
-  ThemeToggleButton 
+import { vi } from 'vitest';
+import {
+  ThemeProvider,
+  useTheme,
+  ThemedBox,
+  ThemeToggleButton,
 } from './ThemeContext';
 
 describe('ThemeContext', () => {
@@ -49,7 +50,9 @@ describe('ThemeContext', () => {
         return (
           <div>
             <div data-testid="theme">{theme}</div>
-            <button onClick={toggleTheme} data-testid="toggle">Toggle</button>
+            <button onClick={toggleTheme} data-testid="toggle">
+              Toggle
+            </button>
           </div>
         );
       };
@@ -61,9 +64,9 @@ describe('ThemeContext', () => {
       );
 
       expect(screen.getByTestId('theme')).toHaveTextContent('light');
-      
+
       fireEvent.click(screen.getByTestId('toggle'));
-      
+
       expect(screen.getByTestId('theme')).toHaveTextContent('dark');
     });
 
@@ -87,7 +90,7 @@ describe('ThemeContext', () => {
       );
 
       fireEvent.click(screen.getByTestId('set-dark'));
-      
+
       expect(screen.getByTestId('theme')).toHaveTextContent('dark');
     });
   });
@@ -100,7 +103,9 @@ describe('ThemeContext', () => {
       };
 
       // Suppress console.error for this test
-      const consoleError = jest.spyOn(console, 'error').mockImplementation();
+      const consoleError = vi
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
 
       expect(() => {
         render(<TestComponent />);
@@ -121,7 +126,7 @@ describe('ThemeContext', () => {
       const box = screen.getByTestId('themed-box');
       expect(box).toHaveStyle({
         backgroundColor: '#ffffff',
-        color: '#000000'
+        color: '#000000',
       });
     });
 
@@ -135,7 +140,7 @@ describe('ThemeContext', () => {
       const box = screen.getByTestId('themed-box');
       expect(box).toHaveStyle({
         backgroundColor: '#333333',
-        color: '#ffffff'
+        color: '#ffffff',
       });
     });
 
@@ -148,11 +153,11 @@ describe('ThemeContext', () => {
       );
 
       const box = screen.getByTestId('themed-box');
-      
+
       expect(box).toHaveStyle({ backgroundColor: '#ffffff' });
-      
+
       fireEvent.click(screen.getByTestId('theme-toggle-button'));
-      
+
       expect(box).toHaveStyle({ backgroundColor: '#333333' });
     });
 
@@ -177,7 +182,9 @@ describe('ThemeContext', () => {
         </ThemeProvider>
       );
 
-      expect(screen.getByTestId('theme-toggle-button')).toHaveTextContent('Switch to Dark Mode');
+      expect(screen.getByTestId('theme-toggle-button')).toHaveTextContent(
+        'Switch to Dark Mode'
+      );
     });
 
     it('should toggle theme when clicked', () => {
@@ -198,11 +205,13 @@ describe('ThemeContext', () => {
       );
 
       expect(screen.getByTestId('current-theme')).toHaveTextContent('light');
-      
+
       fireEvent.click(screen.getByTestId('theme-toggle-button'));
-      
+
       expect(screen.getByTestId('current-theme')).toHaveTextContent('dark');
-      expect(screen.getByTestId('theme-toggle-button')).toHaveTextContent('Switch to Light Mode');
+      expect(screen.getByTestId('theme-toggle-button')).toHaveTextContent(
+        'Switch to Light Mode'
+      );
     });
 
     it('should toggle back and forth', () => {
@@ -213,12 +222,12 @@ describe('ThemeContext', () => {
       );
 
       const button = screen.getByTestId('theme-toggle-button');
-      
+
       expect(button).toHaveTextContent('Switch to Dark Mode');
-      
+
       fireEvent.click(button);
       expect(button).toHaveTextContent('Switch to Light Mode');
-      
+
       fireEvent.click(button);
       expect(button).toHaveTextContent('Switch to Dark Mode');
     });

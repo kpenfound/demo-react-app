@@ -10,14 +10,14 @@ const Counter = ({ initialCount = 0, step = 1, min, max }) => {
   const [count, setCount] = useState(initialCount);
 
   const increment = () => {
-    setCount(prevCount => {
+    setCount((prevCount) => {
       const newCount = prevCount + step;
       return max !== undefined ? Math.min(newCount, max) : newCount;
     });
   };
 
   const decrement = () => {
-    setCount(prevCount => {
+    setCount((prevCount) => {
       const newCount = prevCount - step;
       return min !== undefined ? Math.max(newCount, min) : newCount;
     });
@@ -34,21 +34,18 @@ const Counter = ({ initialCount = 0, step = 1, min, max }) => {
         {count}
       </div>
       <div className="counter__controls">
-        <button 
-          onClick={decrement} 
+        <button
+          onClick={decrement}
           data-testid="decrement-button"
           disabled={min !== undefined && count <= min}
         >
           -
         </button>
-        <button 
-          onClick={reset} 
-          data-testid="reset-button"
-        >
+        <button onClick={reset} data-testid="reset-button">
           Reset
         </button>
-        <button 
-          onClick={increment} 
+        <button
+          onClick={increment}
           data-testid="increment-button"
           disabled={max !== undefined && count >= max}
         >

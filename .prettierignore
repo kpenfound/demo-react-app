@@ -1,0 +1,14 @@
+# Dependencies
+node_modules
+
+# Production
+build
+coverage
+
+# Testing
+test-results
+
+# Misc
+.git
+.github
+*.log

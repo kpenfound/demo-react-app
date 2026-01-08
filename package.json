@@ -12,17 +12,19 @@
     "node-fetch": "^3.3.2",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
-    "react-scripts": "5.0.1",
     "redis": "^4.6.8",
     "uuid4": "^2.0.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "test:unit": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:unit": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:ui": "playwright test --ui",
@@ -31,7 +33,9 @@
     "test:e2e:firefox": "playwright test --project=firefox",
     "test:e2e:webkit": "playwright test --project=webkit",
     "test:e2e:report": "playwright show-report",
-    "test:all": "npm run test:unit -- --watchAll=false && npm run test:e2e"
+    "test:all": "npm run test:unit && npm run test:e2e",
+    "lint": "prettier --check .",
+    "lint:fix": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +56,13 @@
     ]
   },
   "devDependencies": {
-    "@playwright/test": "^1.57.0"
+    "@playwright/test": "^1.57.0",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/coverage-v8": "^4.0.16",
+    "@vitest/ui": "^4.0.16",
+    "jsdom": "^27.4.0",
+    "prettier": "^3.7.4",
+    "vite": "^7.3.1",
+    "vitest": "^4.0.16"
   }
 }

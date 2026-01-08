@@ -4,29 +4,31 @@
  */
 
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import UserList from './UserList';
+import { vi } from 'vitest';
+import UserList from './UserList.jsx';
 import * as api from '../utils/api';
 
 // Mock the API module
-jest.mock('../utils/api');
+vi.mock('../utils/api');
 
 describe('UserList Component', () => {
   const mockUsers = [
     { id: 1, name: 'John Doe', email: 'john@example.com' },
     { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com' }
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com' },
   ];
 
   beforeEach(() => {
     // Clear all mocks before each test
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('Loading State', () => {
     it('should show loading state initially', () => {
       // Mock a delayed response
-      api.fetchUsers.mockImplementation(() => 
-        new Promise(resolve => setTimeout(() => resolve(mockUsers), 100))
+      api.fetchUsers.mockImplementation(
+        () =>
+          new Promise((resolve) => setTimeout(() => resolve(mockUsers), 100))
       );
 
       render(<UserList />);
@@ -58,7 +60,7 @@ describe('UserList Component', () => {
       await waitFor(() => {
         expect(screen.getByTestId('user-list')).toBeInTheDocument();
       });
-      
+
       // Check if email is present in the text content
       expect(screen.getByText(/john@example.com/)).toBeInTheDocument();
     });
@@ -149,7 +151,7 @@ describe('UserList Component', () => {
 
     it('should update users list after refresh', async () => {
       const newUsers = [
-        { id: 4, name: 'Alice Wonder', email: 'alice@example.com' }
+        { id: 4, name: 'Alice Wonder', email: 'alice@example.com' },
       ];
 
       api.fetchUsers

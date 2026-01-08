@@ -6,12 +6,12 @@
 import React from 'react';
 import './Button.css';
 
-const Button = ({ 
-  children, 
-  onClick, 
-  variant = 'primary', 
+const Button = ({
+  children,
+  onClick,
+  variant = 'primary',
   disabled = false,
-  testId = 'button'
+  testId = 'button',
 }) => {
   return (
     <button

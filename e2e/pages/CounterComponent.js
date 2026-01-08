@@ -6,7 +6,7 @@
 export class CounterComponent {
   constructor(page) {
     this.page = page;
-    
+
     // Selectors
     this.selectors = {
       counter: '[data-testid="counter"]',

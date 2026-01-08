@@ -4,7 +4,8 @@
  */
 
 import { render, screen, fireEvent } from '@testing-library/react';
-import Button from './Button';
+import { vi } from 'vitest';
+import Button from './Button.jsx';
 
 describe('Button Component', () => {
   describe('Rendering', () => {
@@ -34,34 +35,38 @@ describe('Button Component', () => {
 
   describe('Events', () => {
     it('should call onClick handler when clicked', () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(<Button onClick={handleClick}>Click Me</Button>);
-      
+
       const button = screen.getByTestId('button');
       fireEvent.click(button);
-      
+
       expect(handleClick).toHaveBeenCalledTimes(1);
     });
 
     it('should not call onClick when disabled', () => {
-      const handleClick = jest.fn();
-      render(<Button onClick={handleClick} disabled>Click Me</Button>);
-      
+      const handleClick = vi.fn();
+      render(
+        <Button onClick={handleClick} disabled>
+          Click Me
+        </Button>
+      );
+
       const button = screen.getByTestId('button');
       fireEvent.click(button);
-      
+
       expect(handleClick).not.toHaveBeenCalled();
     });
 
     it('should call onClick multiple times', () => {
-      const handleClick = jest.fn();
+      const handleClick = vi.fn();
       render(<Button onClick={handleClick}>Click Me</Button>);
-      
+
       const button = screen.getByTestId('button');
       fireEvent.click(button);
       fireEvent.click(button);
       fireEvent.click(button);
-      
+
       expect(handleClick).toHaveBeenCalledTimes(3);
     });
   });
@@ -78,7 +83,9 @@ describe('Button Component', () => {
     });
 
     it('should match snapshot for secondary variant', () => {
-      const { container } = render(<Button variant="secondary">Secondary</Button>);
+      const { container } = render(
+        <Button variant="secondary">Secondary</Button>
+      );
       expect(container.firstChild).toMatchSnapshot();
     });
   });

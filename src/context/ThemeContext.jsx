@@ -11,44 +11,42 @@ export const ThemeProvider = ({ children, defaultTheme = 'light' }) => {
   const [theme, setTheme] = useState(defaultTheme);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
   const value = {
     theme,
     toggleTheme,
-    setTheme
+    setTheme,
   };
 
   return (
-    <ThemeContext.Provider value={value}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };
 
 export const useTheme = () => {
   const context = useContext(ThemeContext);
-  
+
   if (context === undefined) {
     throw new Error('useTheme must be used within a ThemeProvider');
   }
-  
+
   return context;
 };
 
 // Component that uses the theme context
 export const ThemedBox = ({ children }) => {
   const { theme } = useTheme();
-  
+
   return (
-    <div 
+    <div
       data-testid="themed-box"
       style={{
         backgroundColor: theme === 'light' ? '#ffffff' : '#333333',
         color: theme === 'light' ? '#000000' : '#ffffff',
         padding: '20px',
-        borderRadius: '8px'
+        borderRadius: '8px',
       }}
     >
       {children}
@@ -58,12 +56,9 @@ export const ThemedBox = ({ children }) => {
 
 export const ThemeToggleButton = () => {
   const { theme, toggleTheme } = useTheme();
-  
+
   return (
-    <button 
-      onClick={toggleTheme}
-      data-testid="theme-toggle-button"
-    >
+    <button onClick={toggleTheme} data-testid="theme-toggle-button">
       Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
     </button>
   );

@@ -4,45 +4,54 @@
  */
 
 import { renderHook, act } from '@testing-library/react';
+import { vi } from 'vitest';
 import { useLocalStorage, useDebounce, useToggle } from './customHooks';
 
 describe('Custom Hooks', () => {
   describe('useLocalStorage', () => {
     beforeEach(() => {
       localStorage.clear();
-      jest.clearAllMocks();
+      vi.clearAllMocks();
     });
 
     it('should return initial value when localStorage is empty', () => {
-      const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
-      
+      const { result } = renderHook(() =>
+        useLocalStorage('test-key', 'initial')
+      );
+
       const [value] = result.current;
       expect(value).toBe('initial');
     });
 
     it('should save value to localStorage', () => {
-      const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
-      
+      const { result } = renderHook(() =>
+        useLocalStorage('test-key', 'initial')
+      );
+
       act(() => {
         const [, setValue] = result.current;
         setValue('new value');
       });
 
-      expect(localStorage.getItem('test-key')).toBe(JSON.stringify('new value'));
+      expect(localStorage.getItem('test-key')).toBe(
+        JSON.stringify('new value')
+      );
     });
 
     it('should load value from localStorage', () => {
       localStorage.setItem('test-key', JSON.stringify('stored value'));
-      
-      const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
-      
+
+      const { result } = renderHook(() =>
+        useLocalStorage('test-key', 'initial')
+      );
+
       const [value] = result.current;
       expect(value).toBe('stored value');
     });
 
     it('should update value in state and localStorage', () => {
       const { result } = renderHook(() => useLocalStorage('test-key', 0));
-      
+
       act(() => {
         const [, setValue] = result.current;
         setValue(42);
@@ -55,10 +64,10 @@ describe('Custom Hooks', () => {
 
     it('should support function updates', () => {
       const { result } = renderHook(() => useLocalStorage('counter', 0));
-      
+
       act(() => {
         const [, setValue] = result.current;
-        setValue(prev => prev + 1);
+        setValue((prev) => prev + 1);
       });
 
       const [value] = result.current;
@@ -68,7 +77,7 @@ describe('Custom Hooks', () => {
     it('should handle complex objects', () => {
       const obj = { name: 'Test', count: 5 };
       const { result } = renderHook(() => useLocalStorage('test-obj', obj));
-      
+
       act(() => {
         const [, setValue] = result.current;
         setValue({ ...obj, count: 10 });
@@ -79,32 +88,42 @@ describe('Custom Hooks', () => {
     });
 
     it('should handle localStorage errors gracefully', () => {
-      const consoleError = jest.spyOn(console, 'error').mockImplementation();
-      
-      // Mock localStorage to throw error
-      Storage.prototype.setItem = jest.fn(() => {
+      const consoleError = vi
+        .spyOn(console, 'error')
+        .mockImplementation(() => {});
+
+      // Save original setItem
+      const originalSetItem = localStorage.setItem;
+
+      // Mock localStorage.setItem to throw error
+      localStorage.setItem = vi.fn(() => {
         throw new Error('localStorage is full');
       });
 
-      const { result } = renderHook(() => useLocalStorage('test-key', 'initial'));
-      
+      const { result } = renderHook(() =>
+        useLocalStorage('test-key', 'initial')
+      );
+
       act(() => {
         const [, setValue] = result.current;
         setValue('new value');
       });
 
       expect(consoleError).toHaveBeenCalled();
+
+      // Restore
+      localStorage.setItem = originalSetItem;
       consoleError.mockRestore();
     });
   });
 
   describe('useDebounce', () => {
     beforeEach(() => {
-      jest.useFakeTimers();
+      vi.useFakeTimers();
     });
 
     afterEach(() => {
-      jest.useRealTimers();
+      vi.useRealTimers();
     });
 
     it('should return initial value immediately', () => {
@@ -122,13 +141,13 @@ describe('Custom Hooks', () => {
 
       // Update the value
       rerender({ value: 'updated', delay: 500 });
-      
+
       // Value should not change immediately
       expect(result.current).toBe('initial');
 
       // Fast-forward time
       act(() => {
-        jest.advanceTimersByTime(500);
+        vi.advanceTimersByTime(500);
       });
 
       // Now it should be updated
@@ -143,19 +162,19 @@ describe('Custom Hooks', () => {
 
       rerender({ value: 'second', delay: 500 });
       act(() => {
-        jest.advanceTimersByTime(250);
+        vi.advanceTimersByTime(250);
       });
 
       rerender({ value: 'third', delay: 500 });
       act(() => {
-        jest.advanceTimersByTime(250);
+        vi.advanceTimersByTime(250);
       });
 
       // Should still be first
       expect(result.current).toBe('first');
 
       act(() => {
-        jest.advanceTimersByTime(250);
+        vi.advanceTimersByTime(250);
       });
 
       // Now should be third
@@ -166,21 +185,21 @@ describe('Custom Hooks', () => {
   describe('useToggle', () => {
     it('should initialize with default false value', () => {
       const { result } = renderHook(() => useToggle());
-      
+
       const [value] = result.current;
       expect(value).toBe(false);
     });
 
     it('should initialize with custom value', () => {
       const { result } = renderHook(() => useToggle(true));
-      
+
       const [value] = result.current;
       expect(value).toBe(true);
     });
 
     it('should toggle value', () => {
       const { result } = renderHook(() => useToggle(false));
-      
+
       act(() => {
         const [, { toggle }] = result.current;
         toggle();
@@ -200,7 +219,7 @@ describe('Custom Hooks', () => {
 
     it('should set to true', () => {
       const { result } = renderHook(() => useToggle(false));
-      
+
       act(() => {
         const [, { setTrue }] = result.current;
         setTrue();
@@ -212,7 +231,7 @@ describe('Custom Hooks', () => {
 
     it('should set to false', () => {
       const { result } = renderHook(() => useToggle(true));
-      
+
       act(() => {
         const [, { setFalse }] = result.current;
         setFalse();
@@ -224,7 +243,7 @@ describe('Custom Hooks', () => {
 
     it('should handle multiple operations', () => {
       const { result } = renderHook(() => useToggle(false));
-      
+
       act(() => {
         const [, { setTrue }] = result.current;
         setTrue();

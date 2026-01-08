@@ -4,12 +4,15 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import App from './App';
 
 // Mock the UserList component since it makes real API calls
-jest.mock('./components/UserList', () => {
-  return function UserList() {
-    return <div data-testid="user-list-mock">UserList Component</div>;
+vi.mock('./components/UserList', () => {
+  return {
+    default: function UserList() {
+      return <div data-testid="user-list-mock">UserList Component</div>;
+    },
   };
 });
 
@@ -21,7 +24,9 @@ describe('App Component', () => {
 
   it('should render the description', () => {
     render(<App />);
-    expect(screen.getByText(/comprehensive React app showcasing/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/comprehensive React app showcasing/i)
+    ).toBeInTheDocument();
   });
 
   it('should render Button Component section', () => {

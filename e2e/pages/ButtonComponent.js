@@ -47,8 +47,11 @@ export class ButtonComponent {
    * Wait for button to be enabled
    */
   async waitForButtonEnabled(testId = 'button') {
-    await this.page.waitForSelector(`[data-testid="${testId}"]:not([disabled])`, {
-      state: 'visible'
-    });
+    await this.page.waitForSelector(
+      `[data-testid="${testId}"]:not([disabled])`,
+      {
+        state: 'visible',
+      }
+    );
   }
 }

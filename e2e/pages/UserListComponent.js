@@ -6,7 +6,7 @@
 export class UserListComponent {
   constructor(page) {
     this.page = page;
-    
+
     // Selectors
     this.selectors = {
       userList: '[data-testid="user-list"]',
@@ -51,9 +51,9 @@ export class UserListComponent {
    * Wait for users to load
    */
   async waitForUsers(timeout = 10000) {
-    await this.page.waitForSelector(this.selectors.users, { 
+    await this.page.waitForSelector(this.selectors.users, {
       state: 'visible',
-      timeout 
+      timeout,
     });
   }
 
@@ -61,9 +61,9 @@ export class UserListComponent {
    * Wait for loading to finish
    */
   async waitForLoadingToFinish(timeout = 10000) {
-    await this.page.waitForSelector(this.selectors.loading, { 
+    await this.page.waitForSelector(this.selectors.loading, {
       state: 'hidden',
-      timeout 
+      timeout,
     });
   }
 
@@ -134,7 +134,7 @@ export class UserListComponent {
   async waitForError(timeout = 5000) {
     await this.page.waitForSelector(this.selectors.error, {
       state: 'visible',
-      timeout
+      timeout,
     });
   }
 }

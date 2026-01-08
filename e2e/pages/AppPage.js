@@ -8,7 +8,7 @@ import { BasePage } from './BasePage.js';
 export class AppPage extends BasePage {
   constructor(page) {
     super(page);
-    
+
     // Selectors
     this.selectors = {
       header: '.App-header',

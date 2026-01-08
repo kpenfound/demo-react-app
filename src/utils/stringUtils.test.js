@@ -9,7 +9,7 @@ import {
   reverseString,
   isPalindrome,
   countWords,
-  slugify
+  slugify,
 } from './stringUtils';
 
 describe('stringUtils', () => {
@@ -71,7 +71,7 @@ describe('stringUtils', () => {
       ['A man a plan a canal Panama', true],
       ['hello', false],
       ['', false],
-      ['a', true]
+      ['a', true],
     ])('isPalindrome(%s) should return %s', (input, expected) => {
       expect(isPalindrome(input)).toBe(expected);
     });
@@ -107,7 +107,7 @@ describe('stringUtils', () => {
       ['Hello_World', 'hello-world'],
       ['Hello!@# World', 'hello-world'],
       ['  Hello World  ', 'hello-world'],
-      ['', '']
+      ['', ''],
     ])('slugify(%s) should return %s', (input, expected) => {
       expect(slugify(input)).toBe(expected);
     });

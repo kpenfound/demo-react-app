@@ -15,7 +15,7 @@ const UserList = ({ limit = 5 }) => {
   const loadUsers = async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       const data = await fetchUsers(limit);
       setUsers(data);
@@ -61,7 +61,7 @@ const UserList = ({ limit = 5 }) => {
         <p data-testid="no-users">No users found</p>
       ) : (
         <ul data-testid="users">
-          {users.map(user => (
+          {users.map((user) => (
             <li key={user.id} data-testid={`user-${user.id}`}>
               <strong>{user.name}</strong> - {user.email}
             </li>

@@ -4,7 +4,7 @@
  */
 
 import { render, screen, fireEvent } from '@testing-library/react';
-import Counter from './Counter';
+import Counter from './Counter.jsx';
 
 describe('Counter Component', () => {
   describe('Initial Rendering', () => {
@@ -30,7 +30,7 @@ describe('Counter Component', () => {
     it('should increment by default step of 1', () => {
       render(<Counter />);
       const incrementButton = screen.getByTestId('increment-button');
-      
+
       fireEvent.click(incrementButton);
       expect(screen.getByTestId('counter-display')).toHaveTextContent('1');
     });
@@ -38,7 +38,7 @@ describe('Counter Component', () => {
     it('should increment by custom step', () => {
       render(<Counter step={5} />);
       const incrementButton = screen.getByTestId('increment-button');
-      
+
       fireEvent.click(incrementButton);
       expect(screen.getByTestId('counter-display')).toHaveTextContent('5');
     });
@@ -46,35 +46,35 @@ describe('Counter Component', () => {
     it('should increment multiple times', () => {
       render(<Counter />);
       const incrementButton = screen.getByTestId('increment-button');
-      
+
       fireEvent.click(incrementButton);
       fireEvent.click(incrementButton);
       fireEvent.click(incrementButton);
-      
+
       expect(screen.getByTestId('counter-display')).toHaveTextContent('3');
     });
 
     it('should not exceed max value', () => {
       render(<Counter max={5} />);
       const incrementButton = screen.getByTestId('increment-button');
-      
+
       // Click 10 times
       for (let i = 0; i < 10; i++) {
         fireEvent.click(incrementButton);
       }
-      
+
       expect(screen.getByTestId('counter-display')).toHaveTextContent('5');
     });
 
     it('should disable increment button when max is reached', () => {
       render(<Counter max={5} />);
       const incrementButton = screen.getByTestId('increment-button');
-      
+
       // Click until max
       for (let i = 0; i < 5; i++) {
         fireEvent.click(incrementButton);
       }
-      
+
       expect(incrementButton).toBeDisabled();
     });
   });
@@ -83,7 +83,7 @@ describe('Counter Component', () => {
     it('should decrement by default step of 1', () => {
       render(<Counter initialCount={5} />);
       const decrementButton = screen.getByTestId('decrement-button');
-      
+
       fireEvent.click(decrementButton);
       expect(screen.getByTestId('counter-display')).toHaveTextContent('4');
     });
@@ -91,7 +91,7 @@ describe('Counter Component', () => {
     it('should decrement by custom step', () => {
       render(<Counter initialCount={10} step={3} />);
       const decrementButton = screen.getByTestId('decrement-button');
-      
+
       fireEvent.click(decrementButton);
       expect(screen.getByTestId('counter-display')).toHaveTextContent('7');
     });
@@ -99,19 +99,19 @@ describe('Counter Component', () => {
     it('should not go below min value', () => {
       render(<Counter min={0} />);
       const decrementButton = screen.getByTestId('decrement-button');
-      
+
       // Click 5 times
       for (let i = 0; i < 5; i++) {
         fireEvent.click(decrementButton);
       }
-      
+
       expect(screen.getByTestId('counter-display')).toHaveTextContent('0');
     });
 
     it('should disable decrement button when min is reached', () => {
       render(<Counter min={0} />);
       const decrementButton = screen.getByTestId('decrement-button');
-      
+
       expect(decrementButton).toBeDisabled();
     });
   });
@@ -121,11 +121,11 @@ describe('Counter Component', () => {
       render(<Counter initialCount={5} />);
       const incrementButton = screen.getByTestId('increment-button');
       const resetButton = screen.getByTestId('reset-button');
-      
+
       fireEvent.click(incrementButton);
       fireEvent.click(incrementButton);
       expect(screen.getByTestId('counter-display')).toHaveTextContent('7');
-      
+
       fireEvent.click(resetButton);
       expect(screen.getByTestId('counter-display')).toHaveTextContent('5');
     });
@@ -134,11 +134,11 @@ describe('Counter Component', () => {
       render(<Counter />);
       const incrementButton = screen.getByTestId('increment-button');
       const resetButton = screen.getByTestId('reset-button');
-      
+
       fireEvent.click(incrementButton);
       fireEvent.click(incrementButton);
       fireEvent.click(incrementButton);
-      
+
       fireEvent.click(resetButton);
       expect(screen.getByTestId('counter-display')).toHaveTextContent('0');
     });
@@ -151,16 +151,16 @@ describe('Counter Component', () => {
       const incrementButton = screen.getByTestId('increment-button');
       const decrementButton = screen.getByTestId('decrement-button');
       const resetButton = screen.getByTestId('reset-button');
-      
+
       expect(display).toHaveTextContent('10');
-      
+
       fireEvent.click(incrementButton);
       fireEvent.click(incrementButton);
       expect(display).toHaveTextContent('12');
-      
+
       fireEvent.click(decrementButton);
       expect(display).toHaveTextContent('11');
-      
+
       fireEvent.click(resetButton);
       expect(display).toHaveTextContent('10');
     });
@@ -170,18 +170,18 @@ describe('Counter Component', () => {
       const display = screen.getByTestId('counter-display');
       const incrementButton = screen.getByTestId('increment-button');
       const decrementButton = screen.getByTestId('decrement-button');
-      
+
       // Increment to max
       fireEvent.click(incrementButton);
       fireEvent.click(incrementButton);
       fireEvent.click(incrementButton);
       expect(display).toHaveTextContent('10');
       expect(incrementButton).toBeDisabled();
-      
+
       // Try to increment beyond max
       fireEvent.click(incrementButton);
       expect(display).toHaveTextContent('10');
-      
+
       // Decrement to min
       fireEvent.click(decrementButton);
       fireEvent.click(decrementButton);
