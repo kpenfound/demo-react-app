@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Testing
+## Testing FOO
 
 This project showcases comprehensive testing approaches for React applications:
 
