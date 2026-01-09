@@ -1,10 +1,10 @@
 {
   "name": "demo-react-app",
-  "engineVersion": "v0.19.8",
+  "engineVersion": "v0.19.9",
   "toolchains": [
     {
       "name": "yarn",
-      "source": "github.com/kpenfound/dag/yarn",
+      "source": "github.com/kpenfound/dag/yarn@main",
       "pin": "67f95573344cf682ace48ca293bbf1ddaa6e39c2"
     }
   ]
