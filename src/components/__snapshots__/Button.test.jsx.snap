@@ -1,6 +1,6 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
-exports[`Button Component > Snapshots > should match snapshot for disabled button 1`] = `
+exports[`Button Component Snapshots should match snapshot for disabled button 1`] = `
 <button
   class="button button--primary"
   data-testid="button"
@@ -10,7 +10,7 @@ exports[`Button Component > Snapshots > should match snapshot for disabled butto
 </button>
 `;
 
-exports[`Button Component > Snapshots > should match snapshot for primary button 1`] = `
+exports[`Button Component Snapshots should match snapshot for primary button 1`] = `
 <button
   class="button button--primary"
   data-testid="button"
@@ -19,7 +19,7 @@ exports[`Button Component > Snapshots > should match snapshot for primary button
 </button>
 `;
 
-exports[`Button Component > Snapshots > should match snapshot for secondary variant 1`] = `
+exports[`Button Component Snapshots should match snapshot for secondary variant 1`] = `
 <button
   class="button button--secondary"
   data-testid="button"

@@ -3,16 +3,15 @@
  * Demonstrates: Integration testing, rendering with Context
  */
 
+import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { vi } from 'vitest';
 import App from './App';
 
 // Mock the UserList component since it makes real API calls
-vi.mock('./components/UserList', () => {
+jest.mock('./components/UserList', () => {
   return {
-    default: function UserList() {
-      return <div data-testid="user-list-mock">UserList Component</div>;
-    },
+    __esModule: true,
+    default: () => <div data-testid="user-list-mock">UserList Component</div>,
   };
 });
 
