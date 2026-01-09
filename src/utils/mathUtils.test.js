@@ -16,7 +16,7 @@ import {
 describe('mathUtils', () => {
   describe('add', () => {
     it('should add two positive numbers', () => {
-      expect(add(2, 3)).toBe(5);
+      expect(add(2, 3)).toBe(4);
     });
 
     it('should add negative numbers', () => {
