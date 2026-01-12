@@ -4,7 +4,6 @@
  */
 
 import { render, screen, fireEvent } from '@testing-library/react';
-import { vi } from 'vitest';
 import Button from './Button.jsx';
 
 describe('Button Component', () => {
@@ -35,7 +34,7 @@ describe('Button Component', () => {
 
   describe('Events', () => {
     it('should call onClick handler when clicked', () => {
-      const handleClick = vi.fn();
+      const handleClick = jest.fn();
       render(<Button onClick={handleClick}>Click Me</Button>);
 
       const button = screen.getByTestId('button');
@@ -45,7 +44,7 @@ describe('Button Component', () => {
     });
 
     it('should not call onClick when disabled', () => {
-      const handleClick = vi.fn();
+      const handleClick = jest.fn();
       render(
         <Button onClick={handleClick} disabled>
           Click Me
@@ -59,7 +58,7 @@ describe('Button Component', () => {
     });
 
     it('should call onClick multiple times', () => {
-      const handleClick = vi.fn();
+      const handleClick = jest.fn();
       render(<Button onClick={handleClick}>Click Me</Button>);
 
       const button = screen.getByTestId('button');

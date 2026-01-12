@@ -4,12 +4,12 @@
  */
 
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { vi } from 'vitest';
+
 import UserList from './UserList.jsx';
 import * as api from '../utils/api';
 
 // Mock the API module
-vi.mock('../utils/api');
+jest.mock('../utils/api');
 
 describe('UserList Component', () => {
   const mockUsers = [
@@ -20,7 +20,7 @@ describe('UserList Component', () => {
 
   beforeEach(() => {
     // Clear all mocks before each test
-    vi.clearAllMocks();
+    jest.clearAllMocks();
   });
 
   describe('Loading State', () => {

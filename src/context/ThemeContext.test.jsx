@@ -4,7 +4,7 @@
  */
 
 import { render, screen, fireEvent } from '@testing-library/react';
-import { vi } from 'vitest';
+
 import {
   ThemeProvider,
   useTheme,
@@ -103,7 +103,7 @@ describe('ThemeContext', () => {
       };
 
       // Suppress console.error for this test
-      const consoleError = vi
+      const consoleError = jest
         .spyOn(console, 'error')
         .mockImplementation(() => {});
 
