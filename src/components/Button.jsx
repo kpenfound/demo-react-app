@@ -13,9 +13,12 @@ const Button = ({
   disabled = false,
   testId = 'button',
 }) => {
+  const buttonClass = `button button--${variant}`;
+  const debugMode = true;
+
   return (
     <button
-      className={`button button--${variant}`}
+      className={buttonClass}
       onClick={onClick}
       disabled={disabled}
       data-testid={testId}

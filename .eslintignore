@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Test reports
+playwright-report/
+test-results/
+
+# Config files
+*.config.js
+vite.config.js
+babel.config.js
+jest.config.js
+playwright.config.js
+
+# Lock files
+package-lock.json
+yarn.lock
+
+# Git
+.git/
+
+# IDE
+.vscode/
+.idea/

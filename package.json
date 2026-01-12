@@ -33,14 +33,12 @@
     "test:e2e:webkit": "playwright test --project=webkit",
     "test:e2e:report": "playwright show-report",
     "test:all": "npm run test:unit && npm run test:e2e",
-    "lint": "prettier --check .",
-    "lint:fix": "prettier --write ."
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:eslint": "eslint . --ext .js,.jsx",
+    "lint:prettier": "prettier --check .",
+    "lint:fix": "npm run lint:eslint:fix && npm run lint:prettier:fix",
+    "lint:eslint:fix": "eslint . --ext .js,.jsx --fix",
+    "lint:prettier:fix": "prettier --write ."
   },
   "browserslist": {
     "production": [
@@ -60,8 +58,15 @@
     "@otel-test-runner/jest-test": "^0.3.1",
     "@playwright/test": "^1.57.0",
     "@types/jest": "^30.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^5.1.2",
     "babel-jest": "^30.2.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^9.1.2",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
