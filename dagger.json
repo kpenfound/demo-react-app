@@ -1,11 +1,21 @@
 {
   "name": "demo-react-app",
-  "engineVersion": "v0.19.8",
+  "engineVersion": "v0.19.9",
   "toolchains": [
     {
-      "name": "yarn",
-      "source": "github.com/kpenfound/dag/yarn@main",
-      "pin": "67f95573344cf682ace48ca293bbf1ddaa6e39c2"
+      "name": "eslint",
+      "source": "github.com/dagger/eslint@main",
+      "pin": "f5a8a39e4ce2d6c8d9892c12643f5048a9059e99"
+    },
+    {
+      "name": "jest",
+      "source": "github.com/dagger/jest@main",
+      "pin": "f4683e0f13a851acd476a36cbd1c4ebd86fdcee0"
+    },
+    {
+      "name": "prettier",
+      "source": "github.com/dagger/prettier@main",
+      "pin": "bdc94eca7f40d0d77b85e59c4b546159505efe05"
     }
   ]
 }
