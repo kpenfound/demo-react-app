@@ -11,9 +11,7 @@ module.exports = {
   roots: ['<rootDir>/src'],
 
   // Test match patterns - only include pure utility tests (no React dependencies)
-  testMatch: [
-    '**/utils/**/*.test.js',
-  ],
+  testMatch: ['**/utils/**/*.test.js'],
 
   // Exclude patterns
   testPathIgnorePatterns: [
@@ -23,7 +21,7 @@ module.exports = {
     '/e2e/',
     '/backend/',
     '/components/', // Component tests need jsdom/browser
-    '/context/',    // Context tests need jsdom/browser
+    '/context/', // Context tests need jsdom/browser
     'App.test.jsx', // App tests need jsdom/browser
   ],
 
