@@ -10,12 +10,12 @@
     {
       "name": "jest",
       "source": "github.com/dagger/jest@main",
-      "pin": "f4683e0f13a851acd476a36cbd1c4ebd86fdcee0"
+      "pin": "1fcc75bfb96caf16b35596400000b5703ec34001"
     },
     {
       "name": "prettier",
       "source": "github.com/dagger/prettier@main",
-      "pin": "bdc94eca7f40d0d77b85e59c4b546159505efe05"
+      "pin": "eccf1623f9c6c8ae96f0cd7e47e7b2bf72a6da9a"
     }
   ]
 }
