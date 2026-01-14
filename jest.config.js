@@ -4,9 +4,6 @@ module.exports = {
 
   injectGlobals: true,
 
-  // Setup files - removed setupTests.js as it's for jsdom
-  setupFilesAfterEnv: ['@otel-test-runner/jest-test/register'],
-
   // Module paths
   roots: ['<rootDir>/src'],
 
