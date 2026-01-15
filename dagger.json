@@ -1,21 +1,21 @@
 {
   "name": "demo-react-app",
-  "engineVersion": "v0.19.9",
+  "engineVersion": "v0.19.10",
   "toolchains": [
     {
       "name": "eslint",
       "source": "github.com/dagger/eslint@main",
-      "pin": "f5a8a39e4ce2d6c8d9892c12643f5048a9059e99"
+      "pin": "c76d6b3f682b4d93888a7899f36ed32443048be9"
     },
     {
       "name": "jest",
-      "source": "github.com/dagger/jest@fix/testsuite-error-propagation",
-      "pin": "23cc6181b2ef281f3728462f780b3cc21834f92c"
+      "source": "github.com/dagger/jest@main",
+      "pin": "ba2fc0e5978ac380b6359dd94a4dca6816f7d7fb"
     },
     {
       "name": "prettier",
       "source": "github.com/dagger/prettier@main",
-      "pin": "eccf1623f9c6c8ae96f0cd7e47e7b2bf72a6da9a"
+      "pin": "910ff794ddb8ba1c43a67aa15f2cd13d4c6cba4e"
     }
   ]
 }
