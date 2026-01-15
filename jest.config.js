@@ -1,26 +1,26 @@
 module.exports = {
-  // Test environment - Node for unit tests (Playwright handles browser testing)
-  testEnvironment: 'node',
+  // Test environment - jsdom for React component testing
+  testEnvironment: 'jsdom',
 
   injectGlobals: true,
 
   // Module paths
   roots: ['<rootDir>/src'],
 
-  // Test match patterns - only include pure utility tests (no React dependencies)
-  testMatch: ['**/utils/**/*.test.js'],
+  // Test match patterns - include all test files
+  testMatch: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
 
   // Exclude patterns
   testPathIgnorePatterns: [
     '/node_modules/',
     '/dist/',
     '/build/',
-    '/e2e/',
+    '/e2e/', // E2E tests run separately with Playwright
     '/backend/',
-    '/components/', // Component tests need jsdom/browser
-    '/context/', // Context tests need jsdom/browser
-    'App.test.jsx', // App tests need jsdom/browser
   ],
+
+  // Setup files
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
 
   // Transform files
   transform: {
@@ -38,21 +38,18 @@ module.exports = {
     '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
   },
 
-  // Coverage configuration - only pure utilities (no React components or hooks)
+  // Coverage configuration - include all source files
   collectCoverageFrom: [
-    'src/utils/**/*.{js,jsx}',
-    '!src/utils/api.js', // API utilities need integration tests
+    'src/**/*.{js,jsx}',
+    '!src/**/*.test.{js,jsx}',
+    '!src/**/*.spec.{js,jsx}',
+    '!src/setupTests.js',
+    '!src/reportWebVitals.js',
+    '!src/index.jsx',
     '!**/*.config.js',
-    '!**/*.test.{js,jsx}',
   ],
 
-  coveragePathIgnorePatterns: [
-    '/node_modules/',
-    '/e2e/',
-    '/backend/',
-    '/components/',
-    '/context/',
-  ],
+  coveragePathIgnorePatterns: ['/node_modules/', '/e2e/', '/backend/'],
 
   coverageReporters: ['text', 'json', 'html', 'lcov'],
 

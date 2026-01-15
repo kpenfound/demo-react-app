@@ -9,8 +9,8 @@
     },
     {
       "name": "jest",
-      "source": "github.com/dagger/jest@main",
-      "pin": "d9574a25b3356212babf8b5f0b2640198bf0dd35"
+      "source": "github.com/dagger/jest@fix/testsuite-error-propagation",
+      "pin": "23cc6181b2ef281f3728462f780b3cc21834f92c"
     },
     {
       "name": "prettier",
