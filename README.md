@@ -1,5 +1,7 @@
 # Getting Started with Dagger
 
+This is a demo react project
+
 ## Testing
 
 This project showcases comprehensive testing approaches for React applications:
