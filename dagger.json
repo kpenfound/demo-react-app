@@ -10,7 +10,7 @@
     {
       "name": "jest",
       "source": "github.com/dagger/jest@main",
-      "pin": "ba2fc0e5978ac380b6359dd94a4dca6816f7d7fb"
+      "pin": "8d55a0693547dad012ed0c6cf9e099bbbc0a8d47"
     },
     {
       "name": "prettier",
