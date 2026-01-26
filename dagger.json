@@ -5,17 +5,17 @@
     {
       "name": "eslint",
       "source": "github.com/dagger/eslint@main",
-      "pin": "c76d6b3f682b4d93888a7899f36ed32443048be9"
+      "pin": "a16a5bd1deeea2805d1ea0f23e2e8fb103753a15"
     },
     {
       "name": "jest",
       "source": "github.com/dagger/jest@main",
-      "pin": "8d55a0693547dad012ed0c6cf9e099bbbc0a8d47"
+      "pin": "9e6f1e982da085c5fa5e3560d5dba171f3922b32"
     },
     {
       "name": "prettier",
       "source": "github.com/dagger/prettier@main",
-      "pin": "910ff794ddb8ba1c43a67aa15f2cd13d4c6cba4e"
+      "pin": "06083cd1e2f5cd3f8bf2878168f5c0d077a9581a"
     }
   ]
 }
