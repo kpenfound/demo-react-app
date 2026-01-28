@@ -10,6 +10,11 @@ class LocalStorageMock {
     this.store = {};
   }
 
+
+
+
+
+
   clear() {
     this.store = {};
   }
