@@ -1,4 +1,4 @@
-# Getting Started with Dagger
+# Getting Started
 
 This is a demo react project
 
