@@ -27,10 +27,15 @@ func (m *TestSecret) Foo(
 	ctx context.Context,
 	// +optional
 	bar *dagger.Secret,
+	// +optional
+	baz *dagger.Secret,
 ) error {
 	ctr := dag.Container().From("alpine:latest")
 	if bar != nil {
 		ctr = ctr.WithSecretVariable("BAR", bar).WithExec([]string{"echo", "Mounted Secret Bar"})
+	}
+	if baz != nil {
+		ctr = ctr.WithSecretVariable("BAZ", baz).WithExec([]string{"echo", "Mounted Secret Baz"})
 	}
 	_, err := ctr.Sync(ctx)
 	return err
