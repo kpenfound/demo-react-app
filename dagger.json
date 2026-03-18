@@ -21,6 +21,10 @@
       "name": "prettier",
       "source": "github.com/dagger/prettier@main",
       "pin": "282ef62aa11bf6d1a1963b54838101808814e077"
+    },
+    {
+      "name": "test-secret",
+      "source": "test"
     }
   ]
 }
