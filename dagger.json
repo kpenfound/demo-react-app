@@ -1,11 +1,11 @@
 {
   "name": "demo-react-app",
-  "engineVersion": "v0.20.1",
+  "engineVersion": "v0.20.6",
   "toolchains": [
     {
       "name": "eslint",
       "source": "github.com/dagger/eslint@main",
-      "pin": "62aab306404e8a245dd184ec3e8204970923c80d"
+      "pin": "d14290b2d8ab8514422fea834f1c4b8f3ce57feb"
     },
     {
       "name": "intro",
@@ -15,16 +15,12 @@
     {
       "name": "jest",
       "source": "github.com/dagger/jest@main",
-      "pin": "5e693b110904de7de32fe421c0c4f7e2f49272f7"
+      "pin": "8e692d394591961f3628d04e9567b4a6f2a9b856"
     },
     {
       "name": "prettier",
       "source": "github.com/dagger/prettier@main",
-      "pin": "282ef62aa11bf6d1a1963b54838101808814e077"
-    },
-    {
-      "name": "test-secret",
-      "source": "test"
+      "pin": "01c6702e76c693b40d9eefa98c312b6df9278702"
     }
   ]
 }
