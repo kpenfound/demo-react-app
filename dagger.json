@@ -8,11 +8,6 @@
       "pin": "d14290b2d8ab8514422fea834f1c4b8f3ce57feb"
     },
     {
-      "name": "intro",
-      "source": "github.com/dagger/intro@main",
-      "pin": "e520895a9ece8151205d15121f089cb1155f8103"
-    },
-    {
       "name": "jest",
       "source": "github.com/dagger/jest@main",
       "pin": "8e692d394591961f3628d04e9567b4a6f2a9b856"
