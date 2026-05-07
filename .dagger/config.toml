@@ -1,0 +1,40 @@
+[modules.eslint]
+source = "github.com/dagger/eslint@main"
+legacy-default-path = true
+
+# The source directory for the project.
+# settings.source = "./path"
+# The base image to use.
+# settings.baseImageAddress = ""
+# The package manager to use.
+settings.packageManager = "yarn"
+
+[modules.jest]
+source = "github.com/dagger/jest@main"
+legacy-default-path = true
+
+# The source directory for the project.
+# settings.source = "./path"
+# The base image to use.
+# settings.baseImageAddress = ""
+# The package manager to use.
+# settings.packageManager = ""
+
+[modules.prettier]
+source = "github.com/dagger/prettier@main"
+legacy-default-path = true
+
+# The source directory for the project.
+# settings.source = "./path"
+# The base image to use.
+# settings.baseImageAddress = ""
+# The package manager to use.
+# settings.packageManager = ""
+
+[modules.demo-react-app]
+source = "modules/demo-react-app"
+
+[modules.foo]
+source = "modules/foo"
+
+[env.foo]
